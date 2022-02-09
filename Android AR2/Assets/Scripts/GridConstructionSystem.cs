@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridConstructionSystem : MonoBehaviour
 {
-    /*
+    
     private GridXZ<GridObject> grid;
 
     private void Awake()
@@ -12,7 +12,7 @@ public class GridConstructionSystem : MonoBehaviour
         int gridWidth = 10;
         int gridHeight = 10;
         float cellSize = 10f;
-        grid = new GridXZ<gridWidth, gridHeight, cellSize, Vector3.zero, (GridXZ<GridObject> g, int x, int z) => GridObject(g, x, z))
+        grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, Vector3.zero, (GridXZ<GridObject> g, int x, int z) => new GridObject(g, x, z));
     }
     public class GridObject
     {
@@ -26,6 +26,11 @@ public class GridConstructionSystem : MonoBehaviour
             this.x = x;
             this.z = z;
         }
-    }
-    */
+
+        public override string ToString()
+        {
+            return x + ", " + z;
+        }
+    } 
+    
 }
