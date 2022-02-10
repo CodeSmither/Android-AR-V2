@@ -76,12 +76,12 @@ public class GridXZ<TGridObject>
         return cellSize;
     }
 
-    private Vector3 GetWorldPosition (int x, int z)
+    public Vector3 GetWorldPosition (int x, int z)
     {
         return new Vector3(x, 0, z) * cellSize + originPosition;
     }
 
-    private void GetXZ(Vector3 worldPosition, out int x, out int z)
+    public void GetXZ(Vector3 worldPosition, out int x, out int z)
     {
         x = Mathf.FloorToInt((worldPosition - originPosition).x / cellSize);
         z = Mathf.FloorToInt((worldPosition - originPosition).z / cellSize);
@@ -97,7 +97,7 @@ public class GridXZ<TGridObject>
         
     }
 
-    public void TriggerGridobjectChanged(int x, int z)
+    public void TriggerGridObjectChanged(int x, int z)
     {
         if (OnGridObjectChanged != null) OnGridObjectChanged(this, new OnGridObjectChangedEventArgs { x = x, z = z });
     }
