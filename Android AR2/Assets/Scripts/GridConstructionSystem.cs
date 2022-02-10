@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridConstructionSystem : MonoBehaviour
 {
-    
+    [SerializeField] private Transform testTransform;
     private GridXZ<GridObject> grid;
 
     private void Awake()
@@ -12,7 +12,7 @@ public class GridConstructionSystem : MonoBehaviour
         int gridWidth = 10;
         int gridHeight = 10;
         float cellSize = 10f;
-        grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, Vector3.zero, (GridXZ<GridObject> g, int x, int z) => new GridObject(g, x, z));
+        grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3(-gridWidth * (gridWidth/2),0,-gridHeight * (gridHeight/2)), (GridXZ<GridObject> g, int x, int z) => new GridObject(g, x, z));
     }
     public class GridObject
     {
@@ -31,6 +31,13 @@ public class GridConstructionSystem : MonoBehaviour
         {
             return x + ", " + z;
         }
-    } 
-    
+    }
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(testTransform, DptMouse.GetMouseWorldPosition(), Quaternion.identity);
+        }
+    }
+
 }

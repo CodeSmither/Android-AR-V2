@@ -55,7 +55,7 @@ public class GridXZ<TGridObject>
 
             OnGridObjectChanged += (object sender, OnGridObjectChangedEventArgs eventArgs) =>
             {
-                debugTextArray[eventArgs.x, eventArgs.y].text = gridArray[eventArgs.x, eventArgs.y]?.ToString();
+                debugTextArray[eventArgs.x, eventArgs.z].text = gridArray[eventArgs.x, eventArgs.z]?.ToString();
             };
             
         }
