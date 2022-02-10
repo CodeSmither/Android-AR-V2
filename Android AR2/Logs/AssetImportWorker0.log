@@ -1896,3 +1896,12 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 708.548223 seconds.
+  path: Assets/TileMap.txt
+  artifactKey: Guid(84bd823aad0dfa445bffbd9a3b85ba27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TileMap.txt using Guid(84bd823aad0dfa445bffbd9a3b85ba27) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '43a151dce52bd67d893a77efeff0c3d5') in 0.022062 seconds 
+  Import took 0.025606 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
