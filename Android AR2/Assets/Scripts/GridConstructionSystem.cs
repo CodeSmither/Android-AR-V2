@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,22 +6,33 @@ using Utilities.Ulility;
 
 public class GridConstructionSystem : MonoBehaviour
 {
-    [SerializeField] private Transform testTransform;
+    public static GridConstructionSystem Instance { get; private set; }
+
+    public event EventHandler OnSelectedChanged;
+
+
+    [SerializeField] private List<BuildingTypeSO> buildingTypeSOList;
+    [SerializeField] private BuildingTypeSO buildingTypeSO;
     private GridXZ<GridObject> grid;
+    private BuildingTypeSO.Dir dir = BuildingTypeSO.Dir.Down;
 
     private void Awake()
     {
+        Instance = this;
+
         int gridWidth = 10;
         int gridHeight = 10;
         float cellSize = 10f;
         grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3(-gridWidth * (gridWidth/2),0,-gridHeight * (gridHeight/2)), (GridXZ<GridObject> g, int x, int z) => new GridObject(g, x, z));
+
+        buildingTypeSO = buildingTypeSOList[0];
     }
     public class GridObject
     {
         private GridXZ<GridObject> grid;
         private int x;
         private int z;
-        private Transform transform;
+        private PlacedBuilding placedBuilding;
 
         public GridObject(GridXZ<GridObject> grid, int x, int z)
         {
@@ -29,25 +41,30 @@ public class GridConstructionSystem : MonoBehaviour
             this.z = z;
         }
 
-        public void SetTransform(Transform transform)
+        public void SetPlacedBuilding(PlacedBuilding placedBuilding)
         {
-            this.transform = transform;
+            this.placedBuilding = placedBuilding;
             grid.TriggerGridObjectChanged(x, z);
         }
 
-        public void ClearTransform()
+        public PlacedBuilding GetPlacedBuilding()
         {
-            transform = null;
+            return placedBuilding;
+        }
+
+        public void ClearPlacedBuilding()
+        {
+            placedBuilding = null;
         }
 
         public bool CanBuild()
         {
-            return transform == null;
+            return placedBuilding == null;
         }
 
         public override string ToString()
         {
-            return x + ", " + z + "\n" + transform;
+            return x + ", " + z + "\n" + placedBuilding;
         }
     }
     private void Update()
@@ -56,17 +73,97 @@ public class GridConstructionSystem : MonoBehaviour
         {
             grid.GetXZ(DptMouse.GetMouseWorldPosition(), out int x, out int z);
 
-            GridObject gridObject = grid.GetGridObject(x, z);
-            if (gridObject.CanBuild())
+            List<Vector2Int> gridPositionList = buildingTypeSO.GetGridPositionList(new Vector2Int(x, z), dir);
+
+            bool canBuild = true;
+            foreach (Vector2Int gridPosition in gridPositionList)
             {
-                Transform builtTransform = Instantiate(testTransform, grid.GetWorldPosition(x, z), Quaternion.identity);
-                gridObject.SetTransform(builtTransform);
+                if(!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild())
+                {
+                    canBuild = false;
+                    break;
+                }
+            }
+            
+            if (canBuild)
+            {
+                Vector2Int rotationOffset = buildingTypeSO.GetRotationOffset(dir);
+                Vector3 buildingWorldPosition = grid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
+                PlacedBuilding placedBuilding = PlacedBuilding.Construct(buildingWorldPosition, new Vector2Int(x, z), dir, buildingTypeSO);
+                
+
+                foreach(Vector2Int gridPosition in gridPositionList)
+                {
+                    grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedBuilding(placedBuilding);
+                }
             }
             else
             {
-                Debug.Log("Grid Overlap at" + DptMouse.GetMouseWorldPosition().ToString());
+                Utility.CreateWorldTextPopup("Buildings are Currently Overlapping", Mouse3D.GetMouseWorldPosition());
             }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            dir = BuildingTypeSO.GetNextDir(dir);
+            Utility.CreateWorldTextPopup("" + dir, DptMouse.GetMouseWorldPosition());
+        }
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            GridObject gridObject = grid.GetGridObject(DptMouse.GetMouseWorldPosition());
+            PlacedBuilding placedBuilding = gridObject.GetPlacedBuilding();
+            if( placedBuilding != null)
+            {
+                placedBuilding.DestroySelf();
+
+                List<Vector2Int> gridPositionList = placedBuilding.GetGridPositionList();
+
+                foreach (Vector2Int gridPosition in gridPositionList)
+                {
+                    grid.GetGridObject(gridPosition.x, gridPosition.y).ClearPlacedBuilding();
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) { buildingTypeSO = buildingTypeSOList[0]; }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) { buildingTypeSO = buildingTypeSOList[1]; }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) { buildingTypeSO = buildingTypeSOList[2]; }
+        if (Input.GetKeyDown(KeyCode.Alpha4)) { buildingTypeSO = buildingTypeSOList[3]; }
+        if (Input.GetKeyDown(KeyCode.Alpha5)) { buildingTypeSO = buildingTypeSOList[4]; }
+    }
+
+    public Vector3 GetMouseWorldSnappedPosition()
+    {
+        Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
+        grid.GetXZ(mousePosition, out int x, out int z);
+
+        if (buildingTypeSO != null)
+        {
+            Vector2Int rotationOffset = buildingTypeSO.GetRotationOffset(dir);
+            Vector3 placedObjectWorldPosition = grid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
+            return placedObjectWorldPosition;
+        }
+        else
+        {
+            return mousePosition;
         }
     }
 
+    public Quaternion GetPlacedObjectRotation()
+    {
+        if (buildingTypeSO != null)
+        {
+            return Quaternion.Euler(0, buildingTypeSO.GetRotationAngle(dir), 0);
+        }
+        else
+        {
+            return Quaternion.identity;
+        }
+    }
+
+    public BuildingTypeSO GetPlacedObjectTypeSO()
+    {
+        return buildingTypeSO;
+    }
 }
