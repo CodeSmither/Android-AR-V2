@@ -16,6 +16,10 @@ public class GridConstructionSystem : MonoBehaviour
     private GridXZ<GridObject> grid;
     private BuildingTypeSO.Dir dir = BuildingTypeSO.Dir.Down;
 
+    public bool construct;
+    public bool rotate;
+    public bool demolish;
+
     private void Awake()
     {
         Instance = this;
@@ -23,7 +27,7 @@ public class GridConstructionSystem : MonoBehaviour
         int gridWidth = 10;
         int gridHeight = 10;
         float cellSize = 10f;
-        grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3(-gridWidth * (gridWidth/2),0,-gridHeight * (gridHeight/2)), (GridXZ<GridObject> g, int x, int z) => new GridObject(g, x, z));
+        grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3(-gridWidth * (gridWidth / 2), 0, -gridHeight * (gridHeight / 2)), (GridXZ<GridObject> g, int x, int z) => new GridObject(g, x, z));
 
         buildingTypeSO = buildingTypeSOList[0];
     }
@@ -55,6 +59,7 @@ public class GridConstructionSystem : MonoBehaviour
         public void ClearPlacedBuilding()
         {
             placedBuilding = null;
+            grid.TriggerGridObjectChanged(x, z);
         }
 
         public bool CanBuild()
@@ -69,51 +74,54 @@ public class GridConstructionSystem : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (construct == true)
         {
-            grid.GetXZ(DptMouse.GetMouseWorldPosition(), out int x, out int z);
+            grid.GetXZ(DptMouse.GetTouchWorldPosition(), out int x, out int z);
 
             List<Vector2Int> gridPositionList = buildingTypeSO.GetGridPositionList(new Vector2Int(x, z), dir);
 
             bool canBuild = true;
             foreach (Vector2Int gridPosition in gridPositionList)
             {
-                if(!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild())
+                if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild())
                 {
                     canBuild = false;
                     break;
                 }
             }
-            
+
             if (canBuild)
             {
                 Vector2Int rotationOffset = buildingTypeSO.GetRotationOffset(dir);
                 Vector3 buildingWorldPosition = grid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
                 PlacedBuilding placedBuilding = PlacedBuilding.Construct(buildingWorldPosition, new Vector2Int(x, z), dir, buildingTypeSO);
-                
 
-                foreach(Vector2Int gridPosition in gridPositionList)
+
+                foreach (Vector2Int gridPosition in gridPositionList)
                 {
                     grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedBuilding(placedBuilding);
                 }
+                construct = false;
             }
             else
             {
-                Utility.CreateWorldTextPopup("Buildings are Currently Overlapping", Mouse3D.GetMouseWorldPosition());
+                Utility.CreateWorldTextPopup("Buildings are Currently Overlapping", DptMouse.GetTouchWorldPosition());
+                construct = false;
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (rotate == true)
         {
             dir = BuildingTypeSO.GetNextDir(dir);
-            Utility.CreateWorldTextPopup("" + dir, DptMouse.GetMouseWorldPosition());
+            Utility.CreateWorldTextPopup("" + dir, DptMouse.GetTouchWorldPosition());
+            rotate = false;
         }
 
-        if (Input.GetMouseButtonDown(2))
+        if (demolish == true)
         {
-            GridObject gridObject = grid.GetGridObject(DptMouse.GetMouseWorldPosition());
+            GridObject gridObject = grid.GetGridObject(DptMouse.GetTouchWorldPosition());
             PlacedBuilding placedBuilding = gridObject.GetPlacedBuilding();
-            if( placedBuilding != null)
+            if (placedBuilding != null)
             {
                 placedBuilding.DestroySelf();
 
@@ -135,7 +143,7 @@ public class GridConstructionSystem : MonoBehaviour
 
     public Vector3 GetMouseWorldSnappedPosition()
     {
-        Vector3 mousePosition = Mouse3D.GetMouseWorldPosition();
+        Vector3 mousePosition = DptMouse.GetTouchWorldPosition();
         grid.GetXZ(mousePosition, out int x, out int z);
 
         if (buildingTypeSO != null)
@@ -166,4 +174,8 @@ public class GridConstructionSystem : MonoBehaviour
     {
         return buildingTypeSO;
     }
+
+    public void Confirm() { construct = true;}
+    public void Rotate() { rotate = true;}
+    public void Delete() { demolish = true;}
 }

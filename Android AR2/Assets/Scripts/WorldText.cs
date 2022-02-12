@@ -70,24 +70,24 @@ namespace Utilities.Ulility
             }, "WorldTextPopup");
         }
 
-        public static Vector3 GetMouseWorldPosition()
+        public static Vector3 GetTouchWorldPosition()
         {
-            Vector3 vec = GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
+            Vector3 vec = GetTouchWorldPositionWithZ(Input.GetTouch(0).position, Camera.main);
             vec.z = 0f;
             return vec;
         }
 
-        public static Vector3 GetMouseWorldPositionWithZ()
+        public static Vector3 GetTouchWorldPositionWithZ()
         {
-            return GetMouseWorldPositionWithZ(Input.mousePosition, Camera.main);
+            return GetTouchWorldPositionWithZ(Input.GetTouch(0).position, Camera.main);
         }
 
-        public static Vector3 GetMouseWorldPositionWithZ(Camera worldCamera)
+        public static Vector3 GetTouchWorldPositionWithZ(Camera worldCamera)
         {
-            return GetMouseWorldPositionWithZ(Input.mousePosition, worldCamera);
+            return GetTouchWorldPositionWithZ(Input.GetTouch(0).position, worldCamera);
         }
 
-        public static Vector3 GetMouseWorldPositionWithZ(Vector3 screenPosition, Camera worldCamera)
+        public static Vector3 GetTouchWorldPositionWithZ(Vector3 screenPosition, Camera worldCamera)
         {
             Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
             return worldPosition;
@@ -95,7 +95,7 @@ namespace Utilities.Ulility
 
         public static Vector3 GetDirToMouse(Vector3 fromPosition)
         {
-            Vector3 mouseWorldPosition = GetMouseWorldPosition();
+            Vector3 mouseWorldPosition = GetTouchWorldPosition();
             return (mouseWorldPosition - fromPosition).normalized;
         }
 

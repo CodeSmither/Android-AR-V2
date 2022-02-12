@@ -7,7 +7,9 @@ public class DptMouse : MonoBehaviour
 
     public static DptMouse Instance { get; private set; }
 
-    [SerializeField] private LayerMask mouseColliderLayerMask = new LayerMask();
+    [SerializeField] private LayerMask touchColliderLayerMask = new LayerMask();
+    [SerializeField] private Vector3 MemoryPoint;
+
 
     private void Awake()
     {
@@ -16,26 +18,40 @@ public class DptMouse : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, mouseColliderLayerMask))
+        if (Input.touchCount > 0)
         {
-            transform.position = raycastHit.point;
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, touchColliderLayerMask))
+            {
+                transform.position = raycastHit.point;
+            }
         }
+        
     }
 
-    public static Vector3 GetMouseWorldPosition() => Instance.GetMouseWorldPosition_Instance();
+    public static Vector3 GetTouchWorldPosition() => Instance.GetTouchWorldPosition_Instance();
 
-    private Vector3 GetMouseWorldPosition_Instance()
+    private Vector3 GetTouchWorldPosition_Instance()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, mouseColliderLayerMask))
+        if (Input.touchCount > 0)
         {
-            return raycastHit.point;
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, touchColliderLayerMask))
+            {
+                MemoryPoint = raycastHit.point;
+                return raycastHit.point;
+                
+            }
+            else
+            {
+                return MemoryPoint;
+            }
         }
         else
         {
-            return Vector3.zero;
+            return MemoryPoint;
         }
+        
     }
 
 }

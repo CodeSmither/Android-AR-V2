@@ -29,4 +29,9 @@ public class PlacedBuilding : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public override string ToString()
+    {
+        return buildingTypeSO.nameString;
+    }
 }
