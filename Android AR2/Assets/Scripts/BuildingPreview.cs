@@ -22,7 +22,7 @@ public class BuildingPreview : MonoBehaviour
     private void LateUpdate()
     {
         Vector3 targetPosition = GridConstructionSystem.Instance.GetMouseWorldSnappedPosition();
-        targetPosition.y = 1f;
+        targetPosition.y = 0f;
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 15f);
 
         transform.rotation = Quaternion.Lerp(transform.rotation, GridConstructionSystem.Instance.GetPlacedObjectRotation(), Time.deltaTime * 15f);
@@ -44,8 +44,17 @@ public class BuildingPreview : MonoBehaviour
             visual.parent = transform;
             visual.localPosition = Vector3.zero;
             visual.localEulerAngles = Vector3.zero;
+            SetLayerPreview(visual.gameObject, 3);
+        }
+    }
+    private void SetLayerPreview(GameObject targetGameObject, int layer)
+    {
+        targetGameObject.layer = layer;
+        foreach (Transform child in targetGameObject.transform)
+        {
+            SetLayerPreview(child.gameObject, layer);
         }
     }
 
-    
+
 }

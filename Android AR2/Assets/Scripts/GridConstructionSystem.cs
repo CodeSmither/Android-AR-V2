@@ -132,6 +132,7 @@ public class GridConstructionSystem : MonoBehaviour
                     grid.GetGridObject(gridPosition.x, gridPosition.y).ClearPlacedBuilding();
                 }
             }
+            demolish = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) { buildingTypeSO = buildingTypeSOList[0]; }
