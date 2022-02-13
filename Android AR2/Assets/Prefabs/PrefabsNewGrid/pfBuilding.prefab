@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 173391957515806858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.03000003, y: 0.03000003, z: 0.03000003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 173391957494825275}
   m_Father: {fileID: 0}
@@ -99,9 +99,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingVisualized
       objectReference: {fileID: 0}
+    - target: {fileID: 1397546888239997478, guid: aec32265fe8eb884496463b8ba25c357, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3868639907682397671, guid: aec32265fe8eb884496463b8ba25c357, type: 3}
       propertyPath: m_Name
       value: VisCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598261645318112545, guid: aec32265fe8eb884496463b8ba25c357, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.49
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aec32265fe8eb884496463b8ba25c357, type: 3}
