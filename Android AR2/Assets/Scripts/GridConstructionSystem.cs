@@ -26,8 +26,8 @@ public class GridConstructionSystem : MonoBehaviour
 
         int gridWidth = 10;
         int gridHeight = 10;
-        float cellSize = 10f;
-        grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3(-gridWidth * (gridWidth / 2), 0, -gridHeight * (gridHeight / 2)), (GridXZ<GridObject> g, int x, int z) => new GridObject(g, x, z));
+        float cellSize = 10f / 33f;
+        grid = new GridXZ<GridObject>(gridWidth, gridHeight, cellSize, new Vector3((-gridWidth * (gridWidth / 2))/33.333f, -1.14f, ((-gridHeight * (gridHeight / 2))/33.333f)+ 2.47f), (GridXZ<GridObject> g, int x, int z) => new GridObject(g, x, z));
 
         buildingTypeSO = buildingTypeSOList[0];
     }

@@ -40,13 +40,14 @@ namespace Utilities.Ulility
             textMesh.fontSize = fontSize;
             textMesh.color = color;
             textMesh.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
+            textMesh.gameObject.transform.localScale = new Vector3(1 / 33.3333f, 1 / 33.3333f, 1 / 33.3333f);
             return textMesh;
         }
 
         // Create a Text Popup in the World, no parent
         public static void CreateWorldTextPopup(string text, Vector3 localPosition)
         {
-            CreateWorldTextPopup(null, text, localPosition, 20, Color.white, localPosition + new Vector3(0, 10), 1f);
+            CreateWorldTextPopup(null, text, localPosition, 20, Color.white, localPosition + new Vector3(0, 0.303f), 1f);
         }
 
         // Create a Text Popup in the World

@@ -8,12 +8,14 @@ public class DptMouse : MonoBehaviour
     public static DptMouse Instance { get; private set; }
 
     [SerializeField] private LayerMask touchColliderLayerMask = new LayerMask();
+    [SerializeField] private LayerMask UIColliderLayerMask = new LayerMask();
     [SerializeField] private Vector3 MemoryPoint;
 
 
     private void Awake()
     {
         Instance = this;
+        MemoryPoint = new Vector3(0.303f, 0, 2.727f);
     }
 
     private void Update()
@@ -21,10 +23,14 @@ public class DptMouse : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, touchColliderLayerMask))
+            if (!Physics.Raycast(ray, out RaycastHit raycastHitUI, 999f, UIColliderLayerMask))
             {
-                transform.position = raycastHit.point;
+                if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, touchColliderLayerMask))
+                {
+                    transform.position = raycastHit.point;
+                }
             }
+            
         }
         
     }
@@ -35,22 +41,21 @@ public class DptMouse : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, touchColliderLayerMask))
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            if (!Physics.Raycast(ray, out RaycastHit raycastHitUI, 999f, UIColliderLayerMask))
             {
-                MemoryPoint = raycastHit.point;
-                return raycastHit.point;
-                
+                if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, touchColliderLayerMask))
+                {
+                    MemoryPoint = raycastHit.point;
+                    return raycastHit.point;
+
+                }
+                else { return MemoryPoint; }
             }
-            else
-            {
-                return MemoryPoint;
-            }
+            else { return MemoryPoint; }
         }
-        else
-        {
-            return MemoryPoint;
-        }
+        else { return MemoryPoint; }
+        
         
     }
 

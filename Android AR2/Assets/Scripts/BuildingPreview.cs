@@ -22,7 +22,7 @@ public class BuildingPreview : MonoBehaviour
     private void LateUpdate()
     {
         Vector3 targetPosition = GridConstructionSystem.Instance.GetMouseWorldSnappedPosition();
-        targetPosition.y = 0f;
+        targetPosition.y = -1.14f;
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 15f);
 
         transform.rotation = Quaternion.Lerp(transform.rotation, GridConstructionSystem.Instance.GetPlacedObjectRotation(), Time.deltaTime * 15f);
