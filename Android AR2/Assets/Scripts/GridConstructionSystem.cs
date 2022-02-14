@@ -135,11 +135,7 @@ public class GridConstructionSystem : MonoBehaviour
             demolish = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { buildingTypeSO = buildingTypeSOList[0]; }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) { buildingTypeSO = buildingTypeSOList[1]; }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) { buildingTypeSO = buildingTypeSOList[2]; }
-        if (Input.GetKeyDown(KeyCode.Alpha4)) { buildingTypeSO = buildingTypeSOList[3]; }
-        if (Input.GetKeyDown(KeyCode.Alpha5)) { buildingTypeSO = buildingTypeSOList[4]; }
+        
     }
 
     public Vector3 GetMouseWorldSnappedPosition()
@@ -179,4 +175,10 @@ public class GridConstructionSystem : MonoBehaviour
     public void Confirm() { construct = true;}
     public void Rotate() { rotate = true;}
     public void Delete() { demolish = true;}
+
+    public void Building1() { buildingTypeSO = buildingTypeSOList[0]; }
+    public void Building2() { buildingTypeSO = buildingTypeSOList[1]; }
+    public void Building3() { buildingTypeSO = buildingTypeSOList[2]; }
+    public void Building4() { buildingTypeSO = buildingTypeSOList[3]; }
+    public void Building5() { buildingTypeSO = buildingTypeSOList[4]; }
 }

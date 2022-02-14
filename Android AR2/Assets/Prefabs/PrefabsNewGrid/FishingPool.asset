@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29ea95fcfb6e23c43800e1a6c4f821c2, type: 3}
+  m_Name: FishingPool
+  m_EditorClassIdentifier: 
+  nameString: Fishing Pool
+  prefab: {fileID: 8039314738545765069, guid: 47d08f636127b0a409bbe30a54c1d7a4, type: 3}
+  visual: {fileID: 8241120909718312874, guid: d99a5d2019f6b61458ec7791ea5a2cd8, type: 3}
+  width: 1
+  height: 1

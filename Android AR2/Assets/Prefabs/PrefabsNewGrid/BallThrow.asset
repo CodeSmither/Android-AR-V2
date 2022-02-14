@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29ea95fcfb6e23c43800e1a6c4f821c2, type: 3}
+  m_Name: BallThrow
+  m_EditorClassIdentifier: 
+  nameString: Ball Throw
+  prefab: {fileID: 3814462068292848896, guid: 2f75bfa76df8b31419d4d08bee797c59, type: 3}
+  visual: {fileID: 3668398525561515191, guid: 00d2c0ee8f9ae554495952dcc89831b6, type: 3}
+  width: 1
+  height: 1

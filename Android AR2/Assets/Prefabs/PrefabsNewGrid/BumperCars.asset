@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29ea95fcfb6e23c43800e1a6c4f821c2, type: 3}
+  m_Name: BumperCars
+  m_EditorClassIdentifier: 
+  nameString: BumperCars
+  prefab: {fileID: 3398504513565923253, guid: 4bc6290cc4cf66446a6ef042926ffe0d, type: 3}
+  visual: {fileID: 8068968355258145661, guid: 9d961d3359560f449bc8667d2f3d7d71, type: 3}
+  width: 2
+  height: 2

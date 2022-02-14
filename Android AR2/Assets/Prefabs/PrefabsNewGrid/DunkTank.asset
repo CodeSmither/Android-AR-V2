@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29ea95fcfb6e23c43800e1a6c4f821c2, type: 3}
+  m_Name: DunkTank
+  m_EditorClassIdentifier: 
+  nameString: DunkTank
+  prefab: {fileID: 4656505920665389956, guid: e36cf997dd6f7ce4daf22de112d78fd4, type: 3}
+  visual: {fileID: 7495797895237728270, guid: 235a1e921f696484fb3ca05bc9e39517, type: 3}
+  width: 1
+  height: 1
