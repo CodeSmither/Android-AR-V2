@@ -22,8 +22,8 @@ public class MenuNavigation : MonoBehaviour
     {
         UnlockedCode = 1;
         bonusMenu = GameObject.Find("Bonus Menu");
-        pointA = new Vector3(3f,-5200f,0f);
-        pointB = new Vector3(3f,-12700f, 0f);
+        pointA = new Vector3(3f,8800,0f);
+        pointB = new Vector3(3f,1500, 0f);
     }
 
     private void FixedUpdate()

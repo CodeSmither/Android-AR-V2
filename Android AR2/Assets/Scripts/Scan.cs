@@ -17,6 +17,7 @@ public class Scan : MonoBehaviour
     {
         ARSession = GameObject.Find("AR Session Origin");
         ARSession.GetComponent<ARTrackedImageManager>().enabled = false;
+        ARSession.GetComponent<ImageTracking>().enabled = false;
         ScanCanvas.SetActive(false);
     }
     
@@ -33,6 +34,7 @@ public class Scan : MonoBehaviour
             }
             ScanCanvas.SetActive(true);
             ARSession.GetComponent<ARTrackedImageManager>().enabled = true;
+            ARSession.GetComponent<ImageTracking>().enabled = true;
         }
         public void DisableScan()
         {
@@ -44,5 +46,6 @@ public class Scan : MonoBehaviour
 
             ScanCanvas.SetActive(false);
             ARSession.GetComponent<ARTrackedImageManager>().enabled = false;
+            ARSession.GetComponent<ImageTracking>().enabled = false;
         }
 }

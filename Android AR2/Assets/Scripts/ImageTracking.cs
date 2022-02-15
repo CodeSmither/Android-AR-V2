@@ -14,11 +14,7 @@ public class ImageTracking : MonoBehaviour
     private Dictionary<string, GameObject> createdPreFabs = new Dictionary<string, GameObject>();
     private ARTrackedImageManager ImageStorer;
     [HideInInspector]
-    public Text currentStatus;
-    private List<string> ListOfObjects = new List<string>();
-    private int ObjectCount;
     private MenuNavigation menuNavigation;
-
     private void Awake()
     {
         ImageStorer = FindObjectOfType<ARTrackedImageManager>();
@@ -27,9 +23,8 @@ public class ImageTracking : MonoBehaviour
         {
             GameObject newPrefab = Instantiate(prefab, Vector3.zero, Quaternion.identity);
             newPrefab.name = prefab.name;
+            newPrefab.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
             createdPreFabs.Add(prefab.name, newPrefab);
-            
-            
         }
     }
     private void OnEnable()
@@ -41,65 +36,61 @@ public class ImageTracking : MonoBehaviour
         ImageStorer.trackedImagesChanged -= ChangeInImages;
         
     }
-    private void ChangeInImages(ARTrackedImagesChangedEventArgs eventArgs)
+    private void ChangeInImages(ARTrackedImagesChangedEventArgs args)
     {
-        foreach(ARTrackedImage trackableImage in eventArgs.added)
+        foreach(ARTrackedImage trackableImage in args.added)
         {
             UpdateImage(trackableImage);
-            ObjectCount += 1;
             AddedtoList(trackableImage);
             
         }
-        foreach (ARTrackedImage trackableImage in eventArgs.updated)
+        foreach (ARTrackedImage trackableImage in args.updated)
         {
             UpdateImage(trackableImage);
         }
-        foreach (ARTrackedImage trackableImage in eventArgs.removed)
+        foreach (ARTrackedImage trackableImage in args.removed)
         {
             createdPreFabs[trackableImage.name].SetActive(false);
-            ObjectCount -= 1;
             RemovedfromList(trackableImage);
         }
     }
     private void UpdateImage(ARTrackedImage trackableImage)
     {
         string Imagename = trackableImage.referenceImage.name;
-        Vector3 Imageposition = trackableImage.transform.position;
-
+        AssignGameObject(trackableImage.referenceImage.name, trackableImage.transform.position);
+        /*Vector3 Imageposition = trackableImage.transform.position;
         GameObject prefab = createdPreFabs[Imagename];
         prefab.transform.position = Imageposition;
-        prefab.SetActive(true);
-
-        foreach(GameObject currentObject in createdPreFabs.Values)
+        prefab.SetActive(true);*/
+    }
+    private void AssignGameObject(string name, Vector3 newPosition)
+    {
+        if(Prefablist != null)
         {
-           
+            createdPreFabs[name].SetActive(true);
+            createdPreFabs[name].transform.position = newPosition;
+            createdPreFabs[name].transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            foreach(GameObject go in createdPreFabs.Values)
+            {
+                if (go.name != name) { go.SetActive(false); }
+            }
         }
     }
     private void AddedtoList(ARTrackedImage trackableImage)
     {
         string Imagename = trackableImage.referenceImage.name;
-        ListOfObjects.Add(Imagename);
-        CurrentStatus();
+        /*
         if(trackableImage.name == "PopCorn") { menuNavigation.PopcornUnlocked = true; }
         else if(trackableImage.name == "DunkTank") { menuNavigation.DunkTankUnlocked = true; }
         else if(trackableImage.name == "BallThrow") { menuNavigation.BallThrowUnlocked = true; }
         else if(trackableImage.name == "FishCatch") { menuNavigation.FishCatchUnlocked = true; }
         else if(trackableImage.name == "BumperCars") { menuNavigation.BumperCarsUnlocked = true; }
+        */
     }
     private void RemovedfromList(ARTrackedImage trackableImage)
     {
         string Imagename = trackableImage.referenceImage.name;
-        ListOfObjects.RemoveAt(ObjectCount);
-        CurrentStatus();
-    }
-    private void CurrentStatus()
-    {
-        currentStatus.text = "Viewed objects:" + string.Join(" ",ListOfObjects.ToArray());
-    }
-    private void Start()
-    {
-        currentStatus = GameObject.Find("Viewing Object").GetComponent<Text>();
     }
     
-    
+
 }
