@@ -10,17 +10,19 @@ public class DptMouse : MonoBehaviour
     [SerializeField] private LayerMask touchColliderLayerMask = new LayerMask();
     [SerializeField] private LayerMask UIColliderLayerMask = new LayerMask();
     [SerializeField] private Vector3 MemoryPoint;
+    [SerializeField] private Scan scan;
 
 
     private void Awake()
     {
         Instance = this;
         MemoryPoint = new Vector3(0.303f, 0, 2.727f);
+        scan = GameObject.Find("MenuNavigation").GetComponent<Scan>();
     }
 
     private void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && scan.Scanning == false)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
             if (!Physics.Raycast(ray, out RaycastHit raycastHitUI, 999f, UIColliderLayerMask))
@@ -39,7 +41,7 @@ public class DptMouse : MonoBehaviour
 
     private Vector3 GetTouchWorldPosition_Instance()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && scan.Scanning == false)
         {
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
             if (!Physics.Raycast(ray, out RaycastHit raycastHitUI, 999f, UIColliderLayerMask))

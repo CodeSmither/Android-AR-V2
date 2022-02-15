@@ -17,16 +17,18 @@ public class ImageTracking : MonoBehaviour
     public Text currentStatus;
     private List<string> ListOfObjects = new List<string>();
     private int ObjectCount;
+    private MenuNavigation menuNavigation;
 
     private void Awake()
     {
         ImageStorer = FindObjectOfType<ARTrackedImageManager>();
-
+        menuNavigation = GameObject.Find("MenuNavigation").GetComponent<MenuNavigation>();
         foreach(GameObject prefab in Prefablist)
         {
             GameObject newPrefab = Instantiate(prefab, Vector3.zero, Quaternion.identity);
             newPrefab.name = prefab.name;
             createdPreFabs.Add(prefab.name, newPrefab);
+            
             
         }
     }
@@ -46,6 +48,7 @@ public class ImageTracking : MonoBehaviour
             UpdateImage(trackableImage);
             ObjectCount += 1;
             AddedtoList(trackableImage);
+            
         }
         foreach (ARTrackedImage trackableImage in eventArgs.updated)
         {
@@ -69,10 +72,7 @@ public class ImageTracking : MonoBehaviour
 
         foreach(GameObject currentObject in createdPreFabs.Values)
         {
-           // if(currentObject.name != Imagename)
-           // {
-           //     currentObject.SetActive(false);
-           // }
+           
         }
     }
     private void AddedtoList(ARTrackedImage trackableImage)
@@ -80,6 +80,11 @@ public class ImageTracking : MonoBehaviour
         string Imagename = trackableImage.referenceImage.name;
         ListOfObjects.Add(Imagename);
         CurrentStatus();
+        if(trackableImage.name == "PopCorn") { menuNavigation.PopcornUnlocked = true; }
+        else if(trackableImage.name == "DunkTank") { menuNavigation.DunkTankUnlocked = true; }
+        else if(trackableImage.name == "BallThrow") { menuNavigation.BallThrowUnlocked = true; }
+        else if(trackableImage.name == "FishCatch") { menuNavigation.FishCatchUnlocked = true; }
+        else if(trackableImage.name == "BumperCars") { menuNavigation.BumperCarsUnlocked = true; }
     }
     private void RemovedfromList(ARTrackedImage trackableImage)
     {
@@ -95,6 +100,6 @@ public class ImageTracking : MonoBehaviour
     {
         currentStatus = GameObject.Find("Viewing Object").GetComponent<Text>();
     }
-
+    
     
 }

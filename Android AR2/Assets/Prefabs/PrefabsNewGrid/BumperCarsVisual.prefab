@@ -52,6 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -180,6 +181,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -230,6 +232,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8068968355258145661}
     m_Modifications:
+    - target: {fileID: -9202140578138785721, guid: 27d6eb3ce63391341adc238a1ff44955, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 27d6eb3ce63391341adc238a1ff44955, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -274,9 +280,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 27d6eb3ce63391341adc238a1ff44955, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -511511285460046841, guid: 27d6eb3ce63391341adc238a1ff44955, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 27d6eb3ce63391341adc238a1ff44955, type: 3}
       propertyPath: m_Name
       value: BumperCars
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 27d6eb3ce63391341adc238a1ff44955, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483381878585946387, guid: 27d6eb3ce63391341adc238a1ff44955, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150154125589165245, guid: 27d6eb3ce63391341adc238a1ff44955, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6835908549233101305, guid: 27d6eb3ce63391341adc238a1ff44955, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27d6eb3ce63391341adc238a1ff44955, type: 3}

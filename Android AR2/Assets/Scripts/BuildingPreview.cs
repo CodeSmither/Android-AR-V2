@@ -9,6 +9,7 @@ public class BuildingPreview : MonoBehaviour
 
     private void Start()
     {
+        
         RefreshVisual();
 
         GridConstructionSystem.Instance.OnSelectedChanged += Instance_OnSelectedChanged;
@@ -41,6 +42,7 @@ public class BuildingPreview : MonoBehaviour
         if (buildingtTypeSO != null)
         {
             visual = Instantiate(buildingtTypeSO.visual, Vector3.zero, Quaternion.identity);
+            
             visual.parent = transform;
             visual.localPosition = Vector3.zero;
             visual.localEulerAngles = Vector3.zero;

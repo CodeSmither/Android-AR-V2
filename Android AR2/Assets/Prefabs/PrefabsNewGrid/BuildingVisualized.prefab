@@ -85,6 +85,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -180,6 +181,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -233,6 +235,10 @@ PrefabInstance:
     - target: {fileID: 3934162523016602981, guid: 46910bc08e7e21d46b0dcbd434f1baea, type: 3}
       propertyPath: m_Name
       value: VisCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 3934162523016602981, guid: 46910bc08e7e21d46b0dcbd434f1baea, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6393251674261376419, guid: 46910bc08e7e21d46b0dcbd434f1baea, type: 3}
       propertyPath: m_RootOrder

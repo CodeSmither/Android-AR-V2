@@ -99,6 +99,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingVisualized
       objectReference: {fileID: 0}
+    - target: {fileID: 976905343545818488, guid: aec32265fe8eb884496463b8ba25c357, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1397546888239997478, guid: aec32265fe8eb884496463b8ba25c357, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
