@@ -18,10 +18,12 @@ public class BuildingPreview : MonoBehaviour
     private void Instance_OnSelectedChanged(object sender, System.EventArgs e)
     {
         RefreshVisual();
+        
     }
 
     private void LateUpdate()
     {
+
         Vector3 targetPosition = GridConstructionSystem.Instance.GetMouseWorldSnappedPosition();
         targetPosition.y = -1.14f;
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 15f);
@@ -57,6 +59,7 @@ public class BuildingPreview : MonoBehaviour
             SetLayerPreview(child.gameObject, layer);
         }
     }
+
 
 
 }

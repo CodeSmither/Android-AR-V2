@@ -12,11 +12,13 @@ public class ImageTracking : MonoBehaviour
     private GameObject[] Prefablist;
     private Dictionary<string, GameObject> createdPreFabs = new Dictionary<string, GameObject>();
     private ARTrackedImageManager ImageStorer;
+    private Scan scan;
     private GameObject ArCamera;
     [HideInInspector]
     private MenuNavigation menuNavigation;
     private void Awake()
     {
+        scan = GameObject.Find("MenuNavigation").GetComponent<Scan>();
         ImageStorer = FindObjectOfType<ARTrackedImageManager>();
         ArCamera = GameObject.Find("AR Camera");
         menuNavigation = GameObject.Find("MenuNavigation").GetComponent<MenuNavigation>();
@@ -27,6 +29,7 @@ public class ImageTracking : MonoBehaviour
             newPrefab.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
             newPrefab.tag = "Scan";
             createdPreFabs.Add(prefab.name, newPrefab);
+            newPrefab.SetActive(false);
         }
     }
     private void OnEnable()
@@ -43,7 +46,7 @@ public class ImageTracking : MonoBehaviour
         foreach(ARTrackedImage trackableImage in eventargs.added)
         {
             UpdateImage(trackableImage);
-            AddedtoList(trackableImage);
+          
             
         }
         foreach (ARTrackedImage trackableImage in eventargs.updated)
@@ -59,15 +62,13 @@ public class ImageTracking : MonoBehaviour
     {
         string Imagename = trackableImage.referenceImage.name;
         AssignGameObject(trackableImage.referenceImage.name, trackableImage.transform.position);
-        /*Vector3 Imageposition = trackableImage.transform.position;
-        GameObject prefab = createdPreFabs[Imagename];
-        prefab.transform.position = Imageposition;
-        prefab.SetActive(true);*/
+        
     }
     private void AssignGameObject(string name, Vector3 newPosition)
     {
         if(Prefablist != null)
         {
+            scan.UnlockedItems(name);
             createdPreFabs[name].SetActive(true);
             createdPreFabs[name].transform.position = newPosition;
             createdPreFabs[name].transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
@@ -77,19 +78,7 @@ public class ImageTracking : MonoBehaviour
             }
         }
     }
-    private void AddedtoList(ARTrackedImage trackableImage)
-    {
-        Object[] gameObjects = FindObjectsOfType(typeof(GameObject));
-        foreach (GameObject Objects in gameObjects)
-            if (Objects.GetComponent<Renderer>().isVisible && Vector3.Distance(Objects.gameObject.transform.position, ArCamera.transform.position) > 0.1f)
-            {
-                if(Objects.name == "PopcornCartVersion1") { menuNavigation.PopcornUnlocked = true; }
-                else if (Objects.name == "DunkTank") { menuNavigation.PopcornUnlocked = true; }
-                else if (Objects.name == "BallThrow") { menuNavigation.PopcornUnlocked = true; }
-                else if (Objects.name == "FishCatch") { menuNavigation.PopcornUnlocked = true; }
-                else if (Objects.name == "BumperCars") { menuNavigation.PopcornUnlocked = true; }
-            }
-    }
+    
     
 
 }

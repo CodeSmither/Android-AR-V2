@@ -10,11 +10,13 @@ public class Scan : MonoBehaviour
     public bool Scanning;
     public GameObject ARSession;
     private Object[] gameObjects;
+    private MenuNavigation menuNavigation;
     
 
     
     private void Awake()
     {
+        menuNavigation = GameObject.Find("MenuNavigation").GetComponent<MenuNavigation>();
         ARSession = GameObject.Find("AR Session Origin");
         ARSession.GetComponent<ARTrackedImageManager>().enabled = false;
         ARSession.GetComponent<ImageTracking>().enabled = false;
@@ -47,5 +49,26 @@ public class Scan : MonoBehaviour
             ScanCanvas.SetActive(false);
             ARSession.GetComponent<ARTrackedImageManager>().enabled = false;
             ARSession.GetComponent<ImageTracking>().enabled = false;
+        }
+
+        public void UnlockedItems(string prefabname)
+        {
+            if (prefabname == "PopcornCartVersion1")
+            {
+                menuNavigation.PopcornUnlocked = true;
+            }
+
+            if (prefabname == "DunkTank")
+            {
+                menuNavigation.DunkTankUnlocked = true;
+            }
+            if(prefabname == "BumperCars")
+            {
+                menuNavigation.BumperCarsUnlocked = true;
+            }
+            if (prefabname == "FishCatch")
+            {
+                menuNavigation.FishCatchUnlocked = true;
+            }
         }
 }

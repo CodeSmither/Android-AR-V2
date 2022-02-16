@@ -46,30 +46,22 @@ public class MenuNavigation : MonoBehaviour
     {
         isLowerMenuActive = !isLowerMenuActive;
         CheckUnlocks();
-        if (isLowerMenuActive == true) { Unlocks(); }
+        
     }
     private void CheckUnlocks()
     {
-        UnlockedCode = 1;
-        if (PopcornUnlocked == true) { UnlockedCode = UnlockedCode * 2; }
-        else if (DunkTankUnlocked == true) { UnlockedCode = UnlockedCode * 3; }
-        else if (BallThrowUnlocked == true) { UnlockedCode = UnlockedCode * 5; }
-        else if (FishCatchUnlocked == true) { UnlockedCode = UnlockedCode * 7; }
-        else if (BumperCarsUnlocked == true) { UnlockedCode = UnlockedCode * 11; }
-
+        
+        if (PopcornUnlocked == true) { GameObject.Find("BuildBtn3").GetComponent<Button>().interactable = true; }
+        else if (DunkTankUnlocked == true) { GameObject.Find("BuildBtn4").GetComponent<Button>().interactable = true; }
+        else if (BallThrowUnlocked == true) { GameObject.Find("BuildBtn6").GetComponent<Button>().interactable = true; }
+        else if (FishCatchUnlocked == true) { GameObject.Find("BuildBtn8").GetComponent<Button>().interactable = true; }
+        else if (BumperCarsUnlocked == true) { GameObject.Find("BuildBtn12").GetComponent<Button>().interactable = true; }
+        if (PopcornUnlocked == false) { GameObject.Find("BuildBtn3").GetComponent<Button>().interactable = false; }
+        if (DunkTankUnlocked == false) { GameObject.Find("BuildBtn4").GetComponent<Button>().interactable = false; }
+        if (BallThrowUnlocked == false) { GameObject.Find("BuildBtn6").GetComponent<Button>().interactable = false; }
+        if (FishCatchUnlocked == false) { GameObject.Find("BuildBtn8").GetComponent<Button>().interactable = false; }
+        if (BumperCarsUnlocked == false) { GameObject.Find("BuildBtn12").GetComponent<Button>().interactable = false; }
     }
 
-    private void Unlocks()
-    {
-        for (int x = 2; x <= 13; x++)
-        {
-            Button CurrentBtn = GameObject.Find("BuildBtn" + (x - 1))?.GetComponent<Button>();
-            if (CurrentBtn != null)
-            {
-                if (UnlockedCode % x == 0) { CurrentBtn.interactable = true; }
-                else { CurrentBtn.interactable = false; }
-            }
-            
-        }
-    }
+    
 }

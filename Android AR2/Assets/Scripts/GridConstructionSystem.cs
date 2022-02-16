@@ -19,6 +19,7 @@ public class GridConstructionSystem : MonoBehaviour
     public bool construct;
     public bool rotate;
     public bool demolish;
+    public int CurrentBuilding;
 
     private void Awake()
     {
@@ -136,6 +137,8 @@ public class GridConstructionSystem : MonoBehaviour
         }
 
         
+       
+
     }
 
     public Vector3 GetMouseWorldSnappedPosition()
@@ -172,13 +175,24 @@ public class GridConstructionSystem : MonoBehaviour
         return buildingTypeSO;
     }
 
+    
+
+    private void RefreshSelectedObjectType()
+    {
+        OnSelectedChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     public void Confirm() { construct = true;}
     public void Rotate() { rotate = true;}
     public void Delete() { demolish = true;}
 
-    public void Building1() { buildingTypeSO = buildingTypeSOList[0]; }
-    public void Building2() { buildingTypeSO = buildingTypeSOList[1]; }
-    public void Building3() { buildingTypeSO = buildingTypeSOList[2]; }
-    public void Building4() { buildingTypeSO = buildingTypeSOList[3]; }
-    public void Building5() { buildingTypeSO = buildingTypeSOList[4]; }
+    public void CurrentBuilding1() { buildingTypeSO = buildingTypeSOList[0]; RefreshSelectedObjectType(); }
+    public void CurrentBuilding2() { buildingTypeSO = buildingTypeSOList[1]; RefreshSelectedObjectType(); }
+    public void CurrentBuilding3() { buildingTypeSO = buildingTypeSOList[2]; RefreshSelectedObjectType(); }
+    public void CurrentBuilding4() { buildingTypeSO = buildingTypeSOList[3]; RefreshSelectedObjectType(); }
+    public void CurrentBuilding5() { buildingTypeSO = buildingTypeSOList[4]; RefreshSelectedObjectType(); }
+
+    
+
+
 }
