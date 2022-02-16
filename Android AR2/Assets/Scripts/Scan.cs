@@ -28,8 +28,8 @@ public class Scan : MonoBehaviour
             foreach(GameObject Objects in gameObjects)
             {
                 
-                if (Objects.tag == "MainCamera") { Objects.gameObject.SetActive(true); }
-                else if (Objects.tag != "Scan") { Objects.gameObject.SetActive(false); }
+                if (Objects.layer != 7 && Objects.layer != 5) { Objects.gameObject.SetActive(true); }
+                else if (Objects.layer == 7 || Objects.layer == 5) { Objects.gameObject.SetActive(false); }
                 
             }
             ScanCanvas.SetActive(true);
@@ -41,7 +41,7 @@ public class Scan : MonoBehaviour
             Scanning = false;
             foreach (GameObject Objects in gameObjects)
             {
-                if (Objects.tag != "Scan") { Objects.gameObject.SetActive(true); }
+                if (Objects.layer == 7 || Objects.layer == 5) { Objects.gameObject.SetActive(true); }
             }
 
             ScanCanvas.SetActive(false);

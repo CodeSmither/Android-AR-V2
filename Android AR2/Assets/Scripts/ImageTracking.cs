@@ -10,20 +10,22 @@ public class ImageTracking : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] Prefablist;
-
     private Dictionary<string, GameObject> createdPreFabs = new Dictionary<string, GameObject>();
     private ARTrackedImageManager ImageStorer;
+    private GameObject ArCamera;
     [HideInInspector]
     private MenuNavigation menuNavigation;
     private void Awake()
     {
         ImageStorer = FindObjectOfType<ARTrackedImageManager>();
+        ArCamera = GameObject.Find("AR Camera");
         menuNavigation = GameObject.Find("MenuNavigation").GetComponent<MenuNavigation>();
         foreach(GameObject prefab in Prefablist)
         {
             GameObject newPrefab = Instantiate(prefab, Vector3.zero, Quaternion.identity);
             newPrefab.name = prefab.name;
             newPrefab.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            newPrefab.tag = "Scan";
             createdPreFabs.Add(prefab.name, newPrefab);
         }
     }
@@ -36,22 +38,21 @@ public class ImageTracking : MonoBehaviour
         ImageStorer.trackedImagesChanged -= ChangeInImages;
         
     }
-    private void ChangeInImages(ARTrackedImagesChangedEventArgs args)
+    private void ChangeInImages(ARTrackedImagesChangedEventArgs eventargs)
     {
-        foreach(ARTrackedImage trackableImage in args.added)
+        foreach(ARTrackedImage trackableImage in eventargs.added)
         {
             UpdateImage(trackableImage);
             AddedtoList(trackableImage);
             
         }
-        foreach (ARTrackedImage trackableImage in args.updated)
+        foreach (ARTrackedImage trackableImage in eventargs.updated)
         {
             UpdateImage(trackableImage);
         }
-        foreach (ARTrackedImage trackableImage in args.removed)
+        foreach (ARTrackedImage trackableImage in eventargs.removed)
         {
             createdPreFabs[trackableImage.name].SetActive(false);
-            RemovedfromList(trackableImage);
         }
     }
     private void UpdateImage(ARTrackedImage trackableImage)
@@ -78,18 +79,16 @@ public class ImageTracking : MonoBehaviour
     }
     private void AddedtoList(ARTrackedImage trackableImage)
     {
-        string Imagename = trackableImage.referenceImage.name;
-        /*
-        if(trackableImage.name == "PopCorn") { menuNavigation.PopcornUnlocked = true; }
-        else if(trackableImage.name == "DunkTank") { menuNavigation.DunkTankUnlocked = true; }
-        else if(trackableImage.name == "BallThrow") { menuNavigation.BallThrowUnlocked = true; }
-        else if(trackableImage.name == "FishCatch") { menuNavigation.FishCatchUnlocked = true; }
-        else if(trackableImage.name == "BumperCars") { menuNavigation.BumperCarsUnlocked = true; }
-        */
-    }
-    private void RemovedfromList(ARTrackedImage trackableImage)
-    {
-        string Imagename = trackableImage.referenceImage.name;
+        Object[] gameObjects = FindObjectsOfType(typeof(GameObject));
+        foreach (GameObject Objects in gameObjects)
+            if (Objects.GetComponent<Renderer>().isVisible && Vector3.Distance(Objects.gameObject.transform.position, ArCamera.transform.position) > 0.1f)
+            {
+                if(Objects.name == "PopcornCartVersion1") { menuNavigation.PopcornUnlocked = true; }
+                else if (Objects.name == "DunkTank") { menuNavigation.PopcornUnlocked = true; }
+                else if (Objects.name == "BallThrow") { menuNavigation.PopcornUnlocked = true; }
+                else if (Objects.name == "FishCatch") { menuNavigation.PopcornUnlocked = true; }
+                else if (Objects.name == "BumperCars") { menuNavigation.PopcornUnlocked = true; }
+            }
     }
     
 

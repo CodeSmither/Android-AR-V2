@@ -41,6 +41,7 @@ namespace Utilities.Ulility
             textMesh.color = color;
             textMesh.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
             textMesh.gameObject.transform.localScale = new Vector3(1 / 33.3333f, 1 / 33.3333f, 1 / 33.3333f);
+            textMesh.gameObject.layer = 7;
             return textMesh;
         }
 
