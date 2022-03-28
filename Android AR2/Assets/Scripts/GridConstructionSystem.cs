@@ -77,7 +77,11 @@ public class GridConstructionSystem : MonoBehaviour
     {
         if (construct == true)
         {
+            construct = false;
             grid.GetXZ(DptMouse.GetTouchWorldPosition(), out int x, out int z);
+
+            Vector2Int BuildingOrigin = new Vector2Int(x, z);
+
 
             List<Vector2Int> gridPositionList = buildingTypeSO.GetGridPositionList(new Vector2Int(x, z), dir);
 
@@ -91,8 +95,9 @@ public class GridConstructionSystem : MonoBehaviour
                 }
             }
 
-            if (canBuild)
+            if (canBuild == true)
             {
+                
                 Vector2Int rotationOffset = buildingTypeSO.GetRotationOffset(dir);
                 Vector3 buildingWorldPosition = grid.GetWorldPosition(x, z) + new Vector3(rotationOffset.x, 0, rotationOffset.y) * grid.GetCellSize();
                 PlacedBuilding placedBuilding = PlacedBuilding.Construct(buildingWorldPosition, new Vector2Int(x, z), dir, buildingTypeSO);
@@ -102,12 +107,10 @@ public class GridConstructionSystem : MonoBehaviour
                 {
                     grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedBuilding(placedBuilding);
                 }
-                construct = false;
             }
             else
             {
                 Utility.CreateWorldTextPopup("Buildings are Currently Overlapping", DptMouse.GetTouchWorldPosition());
-                construct = false;
             }
         }
 
