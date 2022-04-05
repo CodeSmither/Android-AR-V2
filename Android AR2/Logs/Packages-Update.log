@@ -66,3 +66,14 @@ The following packages were updated:
   com.unity.render-pipelines.universal from version 10.7.0 to 11.0.0
 The following packages were removed:
   com.unity.device-simulator@3.0.3-preview
+
+=== Tue Apr  5 21:00:38 2022
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.render-pipelines.universal from version 11.0.0 to 12.1.2
+  com.unity.timeline from version 1.5.6 to 1.6.3
+  com.unity.xr.arcore from version 4.1.7 to 4.2.1
+  com.unity.xr.arfoundation from version 4.1.7 to 4.2.1

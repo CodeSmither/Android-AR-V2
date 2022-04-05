@@ -15,6 +15,10 @@ public class TourModeControl : MonoBehaviour
         Canvas = GameObject.Find("Canvas");
         TouringCamera = GameObject.Find("TouringCamera");
         TouringCanvas = GameObject.Find("TouringCanvas");
+        Invoke("CanvasDeactivation",0.1f);
+    }
+    private void CanvasDeactivation()
+    {
         TouringCamera.SetActive(false);
         TouringCanvas.SetActive(false);
     }

@@ -6,39 +6,59 @@ public class TourCamera : MonoBehaviour
 {
     private Camera ArCamera;
     private Camera TouringCamera;
-    private int x;
-    private int z;
-    private RectTransform NorthButton;
-    private RectTransform SouthButton;
-    private RectTransform WestButton;
-    private RectTransform EastButton;
-    private RectTransform Centre;
+    [SerializeField]private int x;
+    [SerializeField]private int z;
+    [SerializeField] private RectTransform Canvas;
+    [SerializeField]private RectTransform NorthButton;
+    [SerializeField]private RectTransform SouthButton;
+    [SerializeField]private RectTransform WestButton;
+    [SerializeField]private RectTransform EastButton;
 
-    private void Start()
+    private void Awake()
     {
+        
         ArCamera = GameObject.Find("AR Camera").GetComponent<Camera>();
         TouringCamera = GameObject.Find("TouringCamera").GetComponent<Camera>();
-        z = 6;
-        x = 6;
+        Canvas = GameObject.Find("TouringCanvas").GetComponent<RectTransform>();
+        z = 5;
+        x = 5;
         NorthButton = GameObject.Find("North").GetComponent<RectTransform>();
         SouthButton = GameObject.Find("South").GetComponent<RectTransform>();
         WestButton = GameObject.Find("West").GetComponent<RectTransform>();
         EastButton = GameObject.Find("East").GetComponent<RectTransform>();
-        Centre = GameObject.Find("Centre").GetComponent<RectTransform>();
+        
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        TouringCamera.gameObject.transform.rotation = ArCamera.gameObject.transform.rotation;
-        Centre.transform.rotation = Quaternion.Euler(new Vector3 (0,0,ArCamera.gameObject.transform.rotation.y));
-        NorthButton.transform.rotation = Quaternion.Euler(new Vector3 (0, 0,-ArCamera.gameObject.transform.rotation.y));
-        SouthButton.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -ArCamera.gameObject.transform.rotation.y));
-        EastButton.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -ArCamera.gameObject.transform.rotation.y));
-        WestButton.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -ArCamera.gameObject.transform.rotation.y));
+        
+        
+        NorthButton.localRotation = Quaternion.Euler(new Vector3 (0, 0, 0));
+        SouthButton.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        EastButton.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        WestButton.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
     }
 
-    public void MoveForward() {if(z < 10 && z > -1) TouringCamera.gameObject.transform.position += new Vector3(0, 0, 0.3f); z += 1; }
-    public void MoveBackward() { if (z < 11 && z > -1) TouringCamera.gameObject.transform.position += new Vector3(0, 0, -0.3f); z -= 1; }
-    public void MoveRight() { if (x < 11 && x > -1) TouringCamera.gameObject.transform.position += new Vector3(0.3f, 0, 0); x -= 1; }
-    public void MoveLeft() { if (x < 11 && x > -1) TouringCamera.gameObject.transform.position += new Vector3(-0.3f, 0,  0); x -= -1; }
+    public void MoveForward() {
+        if (z < 10 && z > -1) {
+            TouringCamera.gameObject.transform.position += new Vector3(0, 0, 0.3f);
+            z += 1;
+        }
+    }
+    public void MoveBackward() {
+        if (z < 11 && z > 0) { 
+            TouringCamera.gameObject.transform.position += new Vector3(0, 0, -0.3f); 
+            z -= 1; 
+        } 
+    }
+    public void MoveRight() {
+        if (x < 11 && x > 0) { 
+            TouringCamera.gameObject.transform.position += new Vector3(0.3f, 0, 0); 
+            x -= 1; } 
+    }
+    public void MoveLeft() {
+        if (x < 10 && x > -1) { TouringCamera.gameObject.transform.position += new Vector3(-0.3f, 0, 0); 
+            x -= -1; } 
+    }
 }
