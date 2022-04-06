@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: f9525955c2d501b4a96a6192cf8601fc
+guid: 9a59f35f3d7b608478f3028023c3b15b
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: 2403618374207857895
-    second: ThrowBall
+      74: -8203513904988159367
+    second: Ball Throw
   - first:
-      74: 8582652088099616617
-    second: Armature|ThrowBall
+      74: 337311664705817641
+    second: Armature|Ball Throw
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -40,7 +40,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.05
+    globalScale: 0.06
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -91,7 +91,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0005
+    globalScale: 0.00059999997
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

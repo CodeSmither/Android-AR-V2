@@ -1,14 +1,17 @@
 fileFormatVersion: 2
-guid: f9525955c2d501b4a96a6192cf8601fc
+guid: 5d8d772dda67a5a4d8749270d0ff2c33
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: 2403618374207857895
-    second: ThrowBall
+      74: -4719906143000588298
+    second: BumperCarsAction
   - first:
-      74: 8582652088099616617
-    second: Armature|ThrowBall
+      74: -3880581976594992817
+    second: ArmatureAction
+  - first:
+      74: 4781951162920444690
+    second: Armature|ArmatureAction
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -40,7 +43,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.05
+    globalScale: 0.02
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -91,7 +94,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0005
+    globalScale: 0.0002
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

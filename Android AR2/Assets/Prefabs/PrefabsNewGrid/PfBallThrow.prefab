@@ -52,7 +52,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -61,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a53973379d770d441936c16aa326cd1c, type: 2}
+  - {fileID: 2100000, guid: 131007d9a0c92fe4c8cdd0d44089ec19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,7 +147,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -157,7 +155,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 63abbc307ce7fc1458e1406f458bd4bf, type: 2}
+  - {fileID: 2100000, guid: 131007d9a0c92fe4c8cdd0d44089ec19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -361,8 +359,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff6601146a66f3c4fa9c1cd31b0d7b72, type: 3}
+--- !u!1 &342912785498152645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ff6601146a66f3c4fa9c1cd31b0d7b72, type: 3}
+  m_PrefabInstance: {fileID: 577354163290350484}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1119590840574854271 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ff6601146a66f3c4fa9c1cd31b0d7b72, type: 3}
   m_PrefabInstance: {fileID: 577354163290350484}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &185240302011421959
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342912785498152645}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.125, y: 0.14, z: 0.125}
+  m_Center: {x: 0, y: 0.06, z: 0}
