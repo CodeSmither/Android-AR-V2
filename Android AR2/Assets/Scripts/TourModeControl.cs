@@ -17,12 +17,13 @@ public class TourModeControl : MonoBehaviour
         TouringCanvas = GameObject.Find("TouringCanvas");
         Invoke("CanvasDeactivation",0.1f);
     }
+    // disables touring canvas just after the game starts so other objects can gain references of it
     private void CanvasDeactivation()
     {
         TouringCamera.SetActive(false);
         TouringCanvas.SetActive(false);
     }
-
+    // enables the tour mode 
     public void EnableTour()
     {
         Canvas.SetActive(false);
@@ -31,6 +32,7 @@ public class TourModeControl : MonoBehaviour
         BuildingPreview.SetActive(false);
 
     }
+    // disables the tour mode
     public void DisableTour()
     {
         Canvas.SetActive(true);

@@ -9,10 +9,7 @@ public class TourCamera : MonoBehaviour
     [SerializeField]private int x;
     [SerializeField]private int z;
     [SerializeField] private RectTransform Canvas;
-    [SerializeField]private RectTransform NorthButton;
-    [SerializeField]private RectTransform SouthButton;
-    [SerializeField]private RectTransform WestButton;
-    [SerializeField]private RectTransform EastButton;
+    
 
     private void Awake()
     {
@@ -22,24 +19,17 @@ public class TourCamera : MonoBehaviour
         Canvas = GameObject.Find("TouringCanvas").GetComponent<RectTransform>();
         z = 5;
         x = 5;
-        NorthButton = GameObject.Find("North").GetComponent<RectTransform>();
-        SouthButton = GameObject.Find("South").GetComponent<RectTransform>();
-        WestButton = GameObject.Find("West").GetComponent<RectTransform>();
-        EastButton = GameObject.Find("East").GetComponent<RectTransform>();
         
     }
 
     private void FixedUpdate()
     {
-        
-        
-        NorthButton.localRotation = Quaternion.Euler(new Vector3 (0, 0, 0));
-        SouthButton.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        EastButton.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-        WestButton.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-
+        // ensures the rotation of the two cameras is the same.
+        TouringCamera.transform.rotation = ArCamera.transform.rotation;
     }
 
+
+    //controls players movement in tour mode and prevents them moving outside of the bounds of the grid
     public void MoveForward() {
         if (z < 10 && z > -1) {
             TouringCamera.gameObject.transform.position += new Vector3(0, 0, 0.3f);

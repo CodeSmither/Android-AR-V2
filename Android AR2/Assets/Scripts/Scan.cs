@@ -22,7 +22,7 @@ public class Scan : MonoBehaviour
         ARSession.GetComponent<ImageTracking>().enabled = false;
         ScanCanvas.SetActive(false);
     }
-    
+    // Enables and disables the scan mode which allow AR textures to be inputted into to the game 
         public void EnableScan()
         {
             Scanning = true;
@@ -50,7 +50,7 @@ public class Scan : MonoBehaviour
             ARSession.GetComponent<ARTrackedImageManager>().enabled = false;
             ARSession.GetComponent<ImageTracking>().enabled = false;
         }
-
+    //checks if the prefabs in the scan mode have appeared thus the player has unlocked them within the game
         public void UnlockedItems(string prefabname)
         {
             if (prefabname == "PopcornCartVersion1")
@@ -58,17 +58,29 @@ public class Scan : MonoBehaviour
                 menuNavigation.PopcornUnlocked = true;
             }
 
-            if (prefabname == "DunkTank")
+            if (prefabname == "DunkTankFinalVersion")
             {
                 menuNavigation.DunkTankUnlocked = true;
             }
-            if(prefabname == "BumperCars")
+            if(prefabname == "BallThrowUpdate2")
             {
                 menuNavigation.BumperCarsUnlocked = true;
             }
             if (prefabname == "FishCatch")
             {
                 menuNavigation.FishCatchUnlocked = true;
+            }
+            if (prefabname == "BumperCarsUpdate2")
+            {
+                menuNavigation.BumperCarsUnlocked = true;
+            }
+            if (prefabname == "TeaCups")
+            {
+                menuNavigation.TeaCupsUnlocked = true;
+            }
+            if (prefabname == "Tent")
+            {
+                menuNavigation.TentUnlocked = true;
             }
         }
 }

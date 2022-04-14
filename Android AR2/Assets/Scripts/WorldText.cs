@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//Create World Text and Text Pop-up Inspired by https://www.youtube.com/watch?v=dulosHPl82A&ab_channel=CodeMonkey
 namespace Utilities.Ulility
 {
     public static class Utility
@@ -71,30 +71,20 @@ namespace Utilities.Ulility
                 }
             }, "WorldTextPopup");
         }
-
+        // Collects one touch within the world using a ray cast from the camera and the first finger a player places
         public static Vector3 GetTouchWorldPosition()
         {
             Vector3 vec = GetTouchWorldPositionWithZ(Input.GetTouch(0).position, Camera.main);
             vec.z = 0f;
             return vec;
         }
-
-        public static Vector3 GetTouchWorldPositionWithZ()
-        {
-            return GetTouchWorldPositionWithZ(Input.GetTouch(0).position, Camera.main);
-        }
-
-        public static Vector3 GetTouchWorldPositionWithZ(Camera worldCamera)
-        {
-            return GetTouchWorldPositionWithZ(Input.GetTouch(0).position, worldCamera);
-        }
-
+        // converts the players tap into a position along the Z axis
         public static Vector3 GetTouchWorldPositionWithZ(Vector3 screenPosition, Camera worldCamera)
         {
             Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPosition);
             return worldPosition;
         }
-
+        // caculates the direction that the ray is pointing
         public static Vector3 GetDirToMouse(Vector3 fromPosition)
         {
             Vector3 mouseWorldPosition = GetTouchWorldPosition();

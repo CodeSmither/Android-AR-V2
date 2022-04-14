@@ -1,8 +1,14 @@
 fileFormatVersion: 2
-guid: ff6601146a66f3c4fa9c1cd31b0d7b72
+guid: 9a59f35f3d7b608478f3028023c3b15b
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -8203513904988159367
+    second: Ball Throw
+  - first:
+      74: 337311664705817641
+    second: Armature|Ball Throw
   externalObjects: {}
   materials:
     materialImportMode: 2

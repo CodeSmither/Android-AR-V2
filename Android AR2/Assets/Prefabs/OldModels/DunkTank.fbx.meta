@@ -1,8 +1,14 @@
 fileFormatVersion: 2
-guid: 8b0c432d5b292f74f8f5a42226f3ea43
+guid: f9525955c2d501b4a96a6192cf8601fc
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 2403618374207857895
+    second: ThrowBall
+  - first:
+      74: 8582652088099616617
+    second: Armature|ThrowBall
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,7 +42,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 0.05
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importVisibility: 1

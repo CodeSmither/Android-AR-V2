@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Inspired by Inspired by https://www.youtube.com/watch?v=dulosHPl82A&ab_channel=CodeMonkey
 [CreateAssetMenu()]
 public class BuildingTypeSO : ScriptableObject
 {
-
+    //Creates an Enum to rotate the game object int the correct direction
     public static Dir GetNextDir(Dir dir)
     {
         switch (dir)
@@ -17,7 +17,7 @@ public class BuildingTypeSO : ScriptableObject
             case Dir.Right: return Dir.Down;
         }
     }
-
+    // Sets the 4 possible directions of a game object
     public enum Dir
     {
         Down,
@@ -25,14 +25,14 @@ public class BuildingTypeSO : ScriptableObject
         Up,
         Right,
     }
-
+    // 
     public string nameString;
     public Transform prefab;
     public Transform visual;
     public int width;
     public int height;
 
-
+    // converts enums into direction in degrees
     public int GetRotationAngle(Dir dir)
     {
         switch (dir)
@@ -44,7 +44,7 @@ public class BuildingTypeSO : ScriptableObject
             case Dir.Right: return 270;
         }
     }
-
+    // converts the rotation of an object 
     public Vector2Int GetRotationOffset(Dir dir)
     {
         switch (dir)
@@ -56,7 +56,7 @@ public class BuildingTypeSO : ScriptableObject
             case Dir.Right: return new Vector2Int(height, 0);
         }
     }
-
+    // converts a gameobjects movement within a grid system from a direction and value into a realworld value
     public List<Vector2Int> GetGridPositionList(Vector2Int offset, Dir dir)
     {
         List<Vector2Int> gridPositionList = new List<Vector2Int>();

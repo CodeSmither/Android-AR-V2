@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utilities.Ulility;
-
+// Inspired by https://www.youtube.com/watch?v=dulosHPl82A&ab_channel=CodeMonkey
 public class GridXZ<TGridObject>
 {
     public event EventHandler<OnGridObjectChangedEventArgs> OnGridObjectChanged;
@@ -61,12 +61,12 @@ public class GridXZ<TGridObject>
         }
         
     }
-
+    // returns the grid as a public variable 
     public int GetWidth()
     {
         return width;
     }
-
+    // grid 
     public int GetHeight()
     {
         return height;

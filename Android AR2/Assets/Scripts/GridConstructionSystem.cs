@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utilities.Ulility;
-
+//Inspired by https://www.youtube.com/watch?v=dulosHPl82A&ab_channel=CodeMonkey
 public class GridConstructionSystem : MonoBehaviour
 {
     public static GridConstructionSystem Instance { get; private set; }
@@ -51,41 +51,39 @@ public class GridConstructionSystem : MonoBehaviour
             this.placedBuilding = placedBuilding;
             grid.TriggerGridObjectChanged(x, z);
         }
-
+        // checks the gameobject in a current base
         public PlacedBuilding GetPlacedBuilding()
         {
             return placedBuilding;
         }
-
+        //Clears GameObject In a space
         public void ClearPlacedBuilding()
         {
             placedBuilding = null;
             grid.TriggerGridObjectChanged(x, z);
         }
-
+        //checks if an object space is aviable
         public bool CanBuild()
         {
             return placedBuilding == null;
         }
-
-        public override string ToString()
-        {
-            return x + ", " + z + "\n" + placedBuilding;
-        }
+        
     }
     private void Update()
-    {
+    {   // checks if the construct button has been placed 
         if (construct == true)
-        {
+        {   // then deactivates construct to prevent the function from activating more than once per press
             construct = false;
+            // then it gets the users touch position and converts it into a grid position
             grid.GetXZ(DptMouse.GetTouchWorldPosition(), out int x, out int z);
-
+            
             Vector2Int BuildingOrigin = new Vector2Int(x, z);
 
-
+            // stores the objects grid position onto a list so that it doesn't overlap other objects
             List<Vector2Int> gridPositionList = buildingTypeSO.GetGridPositionList(new Vector2Int(x, z), dir);
-
+            // then checks if the object does overlap with the list 
             bool canBuild = true;
+            // checks if each grid position and checks if any the named co-ordiantes on the object overlap the object trying to be placed
             foreach (Vector2Int gridPosition in gridPositionList)
             {
                 if (!grid.GetGridObject(gridPosition.x, gridPosition.y).CanBuild())
@@ -94,7 +92,7 @@ public class GridConstructionSystem : MonoBehaviour
                     break;
                 }
             }
-
+            // if can build stays true as there were no overlaps it then declares that the game object can be placed and palces it the write position taking in the previously calculated variables
             if (canBuild == true)
             {
                 
@@ -108,19 +106,22 @@ public class GridConstructionSystem : MonoBehaviour
                     grid.GetGridObject(gridPosition.x, gridPosition.y).SetPlacedBuilding(placedBuilding);
                 }
             }
+            // else it will declare text is overlapping
             else
             {
                 Utility.CreateWorldTextPopup("Buildings are Currently Overlapping", DptMouse.GetTouchWorldPosition());
             }
         }
-
+        // this will rotate the object by going through the list of enums to the next to rotate it 90 degrees without need for a referancea
         if (rotate == true)
         {
             dir = BuildingTypeSO.GetNextDir(dir);
+            // notifies the player which direction the are rotating the object to
             Utility.CreateWorldTextPopup("" + dir, DptMouse.GetTouchWorldPosition());
+
             rotate = false;
         }
-
+        // checks if the object space is occupied when the button is pressed and then removes the object from the space as well as the stored list
         if (demolish == true)
         {
             GridObject gridObject = grid.GetGridObject(DptMouse.GetTouchWorldPosition());
@@ -143,7 +144,7 @@ public class GridConstructionSystem : MonoBehaviour
        
 
     }
-
+    // this converts the touch of the player and changes it into 
     public Vector3 GetMouseWorldSnappedPosition()
     {
         Vector3 mousePosition = DptMouse.GetTouchWorldPosition();
@@ -160,7 +161,7 @@ public class GridConstructionSystem : MonoBehaviour
             return mousePosition;
         }
     }
-
+    // this checks the rotation of a player and then converts it into a
     public Quaternion GetPlacedObjectRotation()
     {
         if (buildingTypeSO != null)
@@ -172,14 +173,14 @@ public class GridConstructionSystem : MonoBehaviour
             return Quaternion.identity;
         }
     }
-
+    // checks the type of object placed by the player
     public BuildingTypeSO GetPlacedObjectTypeSO()
     {
         return buildingTypeSO;
     }
 
     
-
+    // checks the players 
     private void RefreshSelectedObjectType()
     {
         OnSelectedChanged?.Invoke(this, EventArgs.Empty);
@@ -194,8 +195,8 @@ public class GridConstructionSystem : MonoBehaviour
     public void CurrentBuilding3() { buildingTypeSO = buildingTypeSOList[2]; RefreshSelectedObjectType(); }
     public void CurrentBuilding4() { buildingTypeSO = buildingTypeSOList[3]; RefreshSelectedObjectType(); }
     public void CurrentBuilding5() { buildingTypeSO = buildingTypeSOList[4]; RefreshSelectedObjectType(); }
-
-    
+    public void CurrentBuilding6() { buildingTypeSO = buildingTypeSOList[5]; RefreshSelectedObjectType(); }
+    public void CurrentBuilding7() { buildingTypeSO = buildingTypeSOList[6]; RefreshSelectedObjectType(); }
 
 
 }

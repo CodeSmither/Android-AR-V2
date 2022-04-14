@@ -32,15 +32,18 @@ public class ImageTracking : MonoBehaviour
             newPrefab.SetActive(false);
         }
     }
+    // Checks if the Image which has been created has changed
     private void OnEnable()
     {
         ImageStorer.trackedImagesChanged += ChangeInImages;
     }
+    // Checks if the Image which has been created has changed
     private void OnDisable()
     {
         ImageStorer.trackedImagesChanged -= ChangeInImages;
         
     }
+    // Checks if the Image event has been updated then applies an effect based on if an object has been added, updated or removed
     private void ChangeInImages(ARTrackedImagesChangedEventArgs eventargs)
     {
         foreach(ARTrackedImage trackableImage in eventargs.added)
@@ -58,12 +61,14 @@ public class ImageTracking : MonoBehaviour
             createdPreFabs[trackableImage.name].SetActive(false);
         }
     }
+    //  updates the image when the image used is changed
     private void UpdateImage(ARTrackedImage trackableImage)
     {
         string Imagename = trackableImage.referenceImage.name;
         AssignGameObject(trackableImage.referenceImage.name, trackableImage.transform.position);
         
     }
+    // sets a gameobject to an image if it matches the gameobject in the library
     private void AssignGameObject(string name, Vector3 newPosition)
     {
         if(Prefablist != null)
